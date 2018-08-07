@@ -10,6 +10,13 @@ import UIKit
 
 class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
+    let topView:UIView = {
+        let view =  UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .orange
+        return view
+    }()
+    
     lazy var tableView:UITableView = {
         let tv = UITableView(frame: CGRect.zero, style: UITableViewStyle.plain)
         tv.translatesAutoresizingMaskIntoConstraints = false
@@ -25,21 +32,33 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.orange
-        view.isOpaque = false
+//        view.isOpaque = false
         
-//        self.tableView.estimatedSectionHeaderHeight = 0
         addAutoLayoutConstraints()
     }
 
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        topView.setDiagonalBackGroundGradient(colorOne: UIColor.init(red: 112.0 / 255.0, green: 66.0 / 255.0, blue: 191.0 / 255.0, alpha: 0.95), colorTwo: UIColor.init(red: 48.0 / 255.0, green: 35.0 / 255.0, blue: 174.0 / 255.0, alpha: 0.95))
+    }
+    
     func addAutoLayoutConstraints(){
+        view.addSubview(topView)
         view.addSubview(tableView)
-        if #available(iOS 11.0, *) {
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        } else {
-            tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        }
+        
+        topView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        topView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        topView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        topView.heightAnchor.constraint(equalToConstant: 145).isActive = true
+        
+//        if #available(iOS 11.0, *) {
+//            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+//        } else {
+//            tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+//        }
+        tableView.topAnchor.constraint(equalTo: topView.bottomAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
@@ -55,18 +74,20 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
+        if indexPath.row % 2 == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CollectionCell", for: indexPath)
+            cell.selectionStyle = .none
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "normalCell", for: indexPath)
+            cell.selectionStyle = .none
             return cell
         }
         
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 0{
+        if indexPath.row % 2 == 0{
             return 400
         }else{
             return 200
@@ -79,6 +100,27 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         // Dispose of any resources that can be recreated.
     }
 
+}
 
+extension UIView {
+    func setBackGroundGradient(colorOne:UIColor,colorTwo:UIColor){
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = bounds
+        gradientLayer.colors = [colorOne.cgColor,colorTwo.cgColor]
+        gradientLayer.locations = [0.0,1.0]
+        layer.insertSublayer(gradientLayer, at: 0)
+    }
+    
+    func setDiagonalBackGroundGradient(colorOne:UIColor,colorTwo:UIColor){
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = bounds
+        gradientLayer.colors = [colorOne.cgColor,colorTwo.cgColor]
+        gradientLayer.locations = [0.0,1.0]
+        gradientLayer.startPoint = CGPoint(x: 1.0, y: 1.0)
+        gradientLayer.endPoint = CGPoint(x: 0.0, y: 0.0)
+        
+        layer.insertSublayer(gradientLayer, at: 0)
+    }
+    
 }
 

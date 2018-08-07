@@ -27,7 +27,7 @@ class AnnouncementTVCell: UITableViewCell {
         label.textAlignment = .center
         label.font = UIFont.boldSystemFont(ofSize: 14)
         label.textColor = UIColor.white
-        label.backgroundColor = .red
+        label.backgroundColor = UIColor(red: 250/255, green: 82/255, blue: 90/255, alpha: 0.81)
         return label
     }()
     
@@ -88,7 +88,7 @@ class AnnouncementTVCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.backgroundColor = .lightGray
+        self.backgroundColor = UIColor(red: 37/255, green: 38/255, blue: 94/255, alpha: 0.1)
         
         addAutoLayout()
     }
@@ -101,6 +101,12 @@ class AnnouncementTVCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        shadowforView(button: contentview, color: UIColor(red: 37/255, green: 38/255, blue: 94/255, alpha: 0.1))
+//        shadowforView(button: contentview, color: .lightGray)
     }
     
     func addAutoLayout(){
@@ -150,5 +156,16 @@ class AnnouncementTVCell: UITableViewCell {
         commentLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
         commentLabel.bottomAnchor.constraint(equalTo: contentview.bottomAnchor,constant:-10).isActive = true
     }
+    
+}
 
+func shadowforView(button:UIView,color:UIColor){
+    
+    button.layer.shadowColor = color.cgColor
+    //    button.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
+    button.layer.shadowOffset = CGSize(width: 0, height: 3)
+    button.layer.shadowOpacity = 1.0
+    button.layer.shadowRadius = 10.0
+    button.layer.masksToBounds = false
+    
 }

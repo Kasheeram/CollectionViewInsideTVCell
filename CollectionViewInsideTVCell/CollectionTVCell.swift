@@ -28,7 +28,7 @@ class CollectionTVCell: UITableViewCell, UICollectionViewDataSource, UICollectio
         label.textAlignment = .center
         label.font = UIFont.boldSystemFont(ofSize: 14)
         label.textColor = UIColor.white
-        label.backgroundColor = .red
+        label.backgroundColor = UIColor(red: 250/255, green: 82/255, blue: 90/255, alpha: 0.81)
         return label
     }()
     
@@ -92,17 +92,27 @@ class CollectionTVCell: UITableViewCell, UICollectionViewDataSource, UICollectio
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "25 Comments"
-//        label.textAlignment = .left
         label.font = UIFont.boldSystemFont(ofSize: 14)
         label.textColor = UIColor(red: 33.0/255.0, green: 73.0/255.0, blue: 88.0/255.0, alpha: 1)
-//        label.backgroundColor = .red
         return label
     }()
+    
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        self.backgroundColor = .lightGray
+        self.backgroundColor = UIColor(red: 37/255, green: 38/255, blue: 94/255, alpha: 0.1)
+        addAutoLayoutConstraints()
+        
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+//        shadowforView(button: contentview, color: .lightGray)
+        shadowforView(button: contentview, color: UIColor(red: 37/255, green: 38/255, blue: 94/255, alpha: 0.1))
+    }
+    
+    func addAutoLayoutConstraints(){
         self.addSubview(contentview)
         
         contentview.addSubview(priorityLabel)
@@ -118,9 +128,8 @@ class CollectionTVCell: UITableViewCell, UICollectionViewDataSource, UICollectio
         contentview.trailingAnchor.constraint(equalTo: self.trailingAnchor,constant:-10).isActive = true
         contentview.bottomAnchor.constraint(equalTo: self.bottomAnchor,constant:-10).isActive = true
         
-        
         priorityLabel.topAnchor.constraint(equalTo: contentview.topAnchor).isActive = true
-//        priorityLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor,constant:15).isActive = true
+        //        priorityLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor,constant:15).isActive = true
         priorityLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
         priorityLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
         priorityLabel.trailingAnchor.constraint(equalTo: contentview.trailingAnchor).isActive = true
@@ -144,7 +153,7 @@ class CollectionTVCell: UITableViewCell, UICollectionViewDataSource, UICollectio
         descriptionLabel.leadingAnchor.constraint(equalTo: profileImageView2.leadingAnchor).isActive = true
         descriptionLabel.trailingAnchor.constraint(equalTo: postdOnLabel.trailingAnchor).isActive = true
         descriptionLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 40).isActive = true
-
+        
         
         myCollectionView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor,constant:15).isActive = true
         myCollectionView.leadingAnchor.constraint(equalTo: profileImageView2.leadingAnchor).isActive = true
@@ -195,7 +204,16 @@ class CollectionTVCell: UITableViewCell, UICollectionViewDataSource, UICollectio
         return CGSize(width:(self.myCollectionView.frame.width),height:(self.myCollectionView.frame.height))
     }
     
-    
+    func shadowforView(button:UIView,color:UIColor){
+        
+        button.layer.shadowColor = color.cgColor
+        //    button.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
+        button.layer.shadowOffset = CGSize(width: 0, height: 3)
+        button.layer.shadowOpacity = 1.0
+        button.layer.shadowRadius = 10.0
+        button.layer.masksToBounds = false
+        
+    }
     
 
 }
