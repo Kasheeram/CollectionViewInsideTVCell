@@ -110,6 +110,13 @@ class CollectionTVCell: UITableViewCell, UICollectionViewDataSource, UICollectio
         super.layoutSubviews()
 //        shadowforView(button: contentview, color: .lightGray)
         shadowforView(button: contentview, color: UIColor(red: 37/255, green: 38/255, blue: 94/255, alpha: 0.1))
+        
+        // for making corner at specific side
+        let rectShape = CAShapeLayer()
+        rectShape.bounds = priorityLabel.frame
+        rectShape.position = priorityLabel.center
+        rectShape.path = UIBezierPath(roundedRect: priorityLabel.bounds,    byRoundingCorners: [.bottomLeft, .topRight], cornerRadii: CGSize(width: 5, height: 5)).cgPath
+        priorityLabel.layer.mask = rectShape
     }
     
     func addAutoLayoutConstraints(){

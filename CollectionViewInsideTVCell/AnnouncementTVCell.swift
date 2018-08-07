@@ -27,6 +27,8 @@ class AnnouncementTVCell: UITableViewCell {
         label.textAlignment = .center
         label.font = UIFont.boldSystemFont(ofSize: 14)
         label.textColor = UIColor.white
+//        label.maskt = true
+//        label.layer.masksToBounds = true
         label.backgroundColor = UIColor(red: 250/255, green: 82/255, blue: 90/255, alpha: 0.81)
         return label
     }()
@@ -91,6 +93,16 @@ class AnnouncementTVCell: UITableViewCell {
         self.backgroundColor = UIColor(red: 37/255, green: 38/255, blue: 94/255, alpha: 0.1)
         
         addAutoLayout()
+        
+//        priorityLabel.clipsToBounds = false
+//        priorityLabel.layer.cornerRadius = 10
+//        if #available(iOS 11.0, *) {
+//            priorityLabel.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+//        } else {
+//            // Fallback on earlier versions
+//        }
+        
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -106,7 +118,16 @@ class AnnouncementTVCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         shadowforView(button: contentview, color: UIColor(red: 37/255, green: 38/255, blue: 94/255, alpha: 0.1))
+        
 //        shadowforView(button: contentview, color: .lightGray)
+    
+        // for making corner at specific side
+        let rectShape = CAShapeLayer()
+        rectShape.bounds = priorityLabel.frame
+        rectShape.position = priorityLabel.center
+        rectShape.path = UIBezierPath(roundedRect: priorityLabel.bounds,    byRoundingCorners: [.bottomLeft, .topRight], cornerRadii: CGSize(width: 5, height: 5)).cgPath
+        priorityLabel.layer.mask = rectShape
+        
     }
     
     func addAutoLayout(){
