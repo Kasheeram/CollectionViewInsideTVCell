@@ -14,6 +14,9 @@
 		89B5B86121196B00007C9FF8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89B5B85F21196B00007C9FF8 /* LaunchScreen.storyboard */; };
 		89B5B86C21196B00007C9FF8 /* CollectionViewInsideTVCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B5B86B21196B00007C9FF8 /* CollectionViewInsideTVCellTests.swift */; };
 		89B5B87721196B00007C9FF8 /* CollectionViewInsideTVCellUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B5B87621196B00007C9FF8 /* CollectionViewInsideTVCellUITests.swift */; };
+		89B5B88521196BCE007C9FF8 /* AnnouncementTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B5B88421196BCE007C9FF8 /* AnnouncementTVCell.swift */; };
+		89EA6F7621196FC100A5F54F /* CollectionTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EA6F7521196FC100A5F54F /* CollectionTVCell.swift */; };
+		89EA6F78211978B100A5F54F /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EA6F77211978B100A5F54F /* CollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +50,9 @@
 		89B5B87221196B00007C9FF8 /* CollectionViewInsideTVCellUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CollectionViewInsideTVCellUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		89B5B87621196B00007C9FF8 /* CollectionViewInsideTVCellUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewInsideTVCellUITests.swift; sourceTree = "<group>"; };
 		89B5B87821196B00007C9FF8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		89B5B88421196BCE007C9FF8 /* AnnouncementTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementTVCell.swift; sourceTree = "<group>"; };
+		89EA6F7521196FC100A5F54F /* CollectionTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTVCell.swift; sourceTree = "<group>"; };
+		89EA6F77211978B100A5F54F /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +105,9 @@
 			children = (
 				89B5B85621196AF3007C9FF8 /* AppDelegate.swift */,
 				89B5B85821196AF3007C9FF8 /* ViewController.swift */,
+				89EA6F7521196FC100A5F54F /* CollectionTVCell.swift */,
+				89B5B88421196BCE007C9FF8 /* AnnouncementTVCell.swift */,
+				89EA6F77211978B100A5F54F /* CollectionViewCell.swift */,
 				89B5B85A21196AF3007C9FF8 /* Main.storyboard */,
 				89B5B85D21196B00007C9FF8 /* Assets.xcassets */,
 				89B5B85F21196B00007C9FF8 /* LaunchScreen.storyboard */,
@@ -256,8 +265,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89EA6F78211978B100A5F54F /* CollectionViewCell.swift in Sources */,
 				89B5B85921196AF3007C9FF8 /* ViewController.swift in Sources */,
 				89B5B85721196AF3007C9FF8 /* AppDelegate.swift in Sources */,
+				89B5B88521196BCE007C9FF8 /* AnnouncementTVCell.swift in Sources */,
+				89EA6F7621196FC100A5F54F /* CollectionTVCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,7 +375,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -417,7 +429,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
