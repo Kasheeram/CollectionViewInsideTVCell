@@ -10,6 +10,9 @@ import UIKit
 
 class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
+    var storedOffsets = [Int: CGFloat]()
+    var images = ["image1","image2","image3","image4"]
+    
     let topView:UIView = {
         let view =  UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -94,6 +97,24 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         }
     }
     
+    
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        guard let tableViewCell = cell as? CollectionTVCell else { return }
+        
+        tableViewCell.setCollectionViewDataSourceDelegate(self, forRow: indexPath.row)
+        tableViewCell.collectionViewOffset = storedOffsets[indexPath.row] ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        guard let tableViewCell = cell as? CollectionTVCell else { return }
+        
+        storedOffsets[indexPath.row] = tableViewCell.collectionViewOffset
+    }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -120,6 +141,48 @@ extension UIView {
         gradientLayer.endPoint = CGPoint(x: 0.0, y: 0.0)
         
         layer.insertSublayer(gradientLayer, at: 0)
+    }
+    
+}
+
+extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate,UICollectionViewDelegateFlowLayout {
+    
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return images.count
+//    }
+    
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
+//
+//        cell.backgroundColor = model[collectionView.tag][indexPath.item]
+//
+//        return cell
+//    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("Collection view at row \(collectionView.tag) selected index path \(indexPath)")
+    }
+    
+    
+    // MARK: UICollectionViewDataSource
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return images.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionCell", for: indexPath) as! CollectionViewCell
+        cell.attachmentImages.image = UIImage(named: images[indexPath.row])
+        
+        return cell
+    }
+    
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width:(collectionView.frame.width),height:(collectionView.frame.height))
     }
     
 }

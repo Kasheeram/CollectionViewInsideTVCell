@@ -40,3 +40,5 @@ class CollectionViewCell: UICollectionViewCell {
     }
     
 }
+
+

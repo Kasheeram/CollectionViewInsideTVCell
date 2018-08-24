@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CollectionTVCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewDelegate,UICollectionViewDelegateFlowLayout  {
+class CollectionTVCell: UITableViewCell  {
     
     var images = ["image1","image2","image3","image4"]
     
@@ -80,8 +80,8 @@ class CollectionTVCell: UITableViewCell, UICollectionViewDataSource, UICollectio
         layout.minimumInteritemSpacing = 0.0
         let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
         cv.translatesAutoresizingMaskIntoConstraints = false
-        cv.delegate = self
-        cv.dataSource = self
+//        cv.delegate = self
+//        cv.dataSource = self
         cv.isPagingEnabled = true
         cv.register(CollectionViewCell.self, forCellWithReuseIdentifier: "CollectionCell")
         cv.backgroundColor = UIColor.clear
@@ -190,26 +190,7 @@ class CollectionTVCell: UITableViewCell, UICollectionViewDataSource, UICollectio
         // Configure the view for the selected state
     }
     
-    // MARK: UICollectionViewDataSource
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 1
-    }
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
-    }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionCell", for: indexPath) as! CollectionViewCell
-        cell.attachmentImages.image = UIImage(named: images[indexPath.row])
-        
-        return cell
-    }
-    
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width:(self.myCollectionView.frame.width),height:(self.myCollectionView.frame.height))
-    }
     
     func shadowforView(button:UIView,color:UIColor){
         
@@ -221,6 +202,22 @@ class CollectionTVCell: UITableViewCell, UICollectionViewDataSource, UICollectio
         button.layer.masksToBounds = false
         
     }
-    
+}
 
+
+extension CollectionTVCell {
+    
+    func setCollectionViewDataSourceDelegate<D: UICollectionViewDataSource & UICollectionViewDelegate>(_ dataSourceDelegate: D, forRow row: Int) {
+        
+        myCollectionView.delegate = dataSourceDelegate
+        myCollectionView.dataSource = dataSourceDelegate
+        myCollectionView.tag = row
+        myCollectionView.setContentOffset(myCollectionView.contentOffset, animated:false) // Stops collection view if it was scrolling.
+        myCollectionView.reloadData()
+    }
+    
+    var collectionViewOffset: CGFloat {
+        set { myCollectionView.contentOffset.x = newValue }
+        get { return myCollectionView.contentOffset.x }
+    }
 }

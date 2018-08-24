@@ -90,8 +90,8 @@ class AnnouncementTVCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.backgroundColor = UIColor(red: 37/255, green: 38/255, blue: 94/255, alpha: 0.1)
         
+        self.backgroundColor = UIColor(red: 37/255, green: 38/255, blue: 94/255, alpha: 0.1)
         addAutoLayout()
         
 //        priorityLabel.clipsToBounds = false
